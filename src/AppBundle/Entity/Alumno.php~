@@ -1,0 +1,39 @@
+<?php
+
+/*
+ *Clase para definir las propiedades de los alumnos 
+ */
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="alumno")
+ */
+class Alumno
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $nombre;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $apellido;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $nacionalidad;
+}
+
