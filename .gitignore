@@ -1,3 +1,7 @@
 /nbproject/private/
 /vendor/*
 /app/logs/*
+/composer.phar
+/bin/*
+/tests/
+/app/cache/*

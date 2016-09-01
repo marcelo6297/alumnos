@@ -1,0 +1,3 @@
+alumnos_homepage:
+    path:     /alumnos
+    defaults: { _controller: AlumnosBundle:Default:index }
