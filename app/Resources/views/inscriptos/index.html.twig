@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+        {% block mdToolBar %}
+            Lista de inscriptos
+        {% endblock %}
+        
+        {% block mdContent %}
+            
+            
+            <md-card>       
+
+                <md-card-content>   
+                    <h3>Base de Datos</h3>
+                    {{ phpFullDate }}
+                    <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Fecharegistro</th>
+                    <th>Tipocursante</th>
+                    <th>Puntaje</th>
+                    <th>Calificacion</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscripto in inscriptos %}
+                    <tr>
+                        <td><a href="{{ path('inscriptos_show', { 'id': inscripto.id }) }}">{{ inscripto.id }}</a></td>
+                        <td>{% if inscripto.fechaRegistro %}{{ inscripto.fechaRegistro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ inscripto.tipoCursante }}</td>
+                        <td>{{ inscripto.puntaje }}</td>
+                        <td>{{ inscripto.calificacion }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('inscriptos_show', { 'id': inscripto.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('inscriptos_edit', { 'id': inscripto.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+                </md-card-content>
+
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-raised md-primary"  >Exportar</md-button>
+                    <md-button class="md-raised md-primary" >Inicializar</md-button>
+                    <md-button class="md-raised md-warn" >Borrar</md-button>
+                </md-card-actions>
+
+            </md-card>     
+            
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript"></script>
+{% endblock%}
+

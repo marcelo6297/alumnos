@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{#Cambiando el estilo de renderizado#}
+
+{#{% form_theme form 'templates/fields.html.twig' %}#}
+
+
+
+{% block mdToolBar %} Nuevo {% endblock %}
+
+
+{% block mdContent %}
+    
+    <md-card ng-controller="newCtrl">       
+
+        {{ form_start(form) }}
+    
+        <md-card-content>
+            {{ form_widget(form) }}
+        </md-card-content>
+        
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button type="submit" class="md-raised md-primary">Guardar</md-button>
+        </md-card-actions>
+        
+        {% verbatim %}
+            <h1> {{ nombre }} </h1>
+            <h1> {{ codigo }} </h1>
+        {% endverbatim %}
+    {{ form_end(form) }}
+    </md-card>
+    
+{% endblock %}
+
+{% block javascript %}
+   
+{% endblock %}

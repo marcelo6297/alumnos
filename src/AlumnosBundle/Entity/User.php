@@ -84,6 +84,22 @@ class User extends BaseUser
      * @ORM\Column(name="telefono", type="string", length=255, nullable=false)
      */
     private $telefono;
+    
+    
+    function __construct() {
+        parent::__construct();
+        $this->nombre = "default";
+        $this->apellido = "default";
+        $this->numeroDocumento = "default";
+        $this->fechaNacimiento = new \DateTime();
+        $this->nacionalidad = "PY";
+        $this->direccion = "default";
+        $this->telefono = "default";
+        $this->fechaIngreso = new \DateTime();
+        
+        
+    }
+
 
 
 }

@@ -1,3 +1,13 @@
+alumnos_inscriptos:
+        resource: "@AlumnosBundle/Resources/config/routing/inscriptos.yml"
+        prefix:   /inscriptos
+alumnos_curso:
+    resource: "@AlumnosBundle/Resources/config/routing/curso.yml"
+    prefix:   /curso
+alumnos_materia:
+    resource: "@AlumnosBundle/Resources/config/routing/materia.yml"
+    prefix:   /materia
+
 alumnos_homepage:
     path:     /alumnos
     defaults: { _controller: AlumnosBundle:Default:index }

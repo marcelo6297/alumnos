@@ -1,0 +1,24 @@
+inscriptos_index:
+    path:     /
+    defaults: { _controller: "AlumnosBundle:Inscriptos:index" }
+    methods:  GET
+
+inscriptos_show:
+    path:     /{id}/show
+    defaults: { _controller: "AlumnosBundle:Inscriptos:show" }
+    methods:  GET
+
+inscriptos_new:
+    path:     /new
+    defaults: { _controller: "AlumnosBundle:Inscriptos:new" }
+    methods:  [GET, POST]
+
+inscriptos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AlumnosBundle:Inscriptos:edit" }
+    methods:  [GET, POST]
+
+inscriptos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AlumnosBundle:Inscriptos:delete" }
+    methods:  DELETE

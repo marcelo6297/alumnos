@@ -18,6 +18,11 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new AlumnosBundle\AlumnosBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            //Manejo de formularios en formato JSON
+            new Mcfedr\JsonFormBundle\McfedrJsonFormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

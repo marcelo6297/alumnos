@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+
+{% block mdToolBar %}
+    Lista de materias
+{% endblock %}
+
+
+{% block mdContent2 %} 
+    
+    
+    <md-card>       
+        <md-card-content>
+            <md-list>
+                {% for materium in materias %}
+                <md-list-item class="md-2-line" >
+                    <md-checkbox ></md-checkbox>
+                    <div class="md-list-item-text">
+                        <h3>{{ materium.nombre }}</h3>
+                        <p>{{ materium.codigo}}</p>
+                    </div>
+                </md-list-item>
+                {% endfor %}
+            </md-list>
+        </md-card-content>
+            
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" href="{{ path('materia_new') }}">Nuevo</md-button>
+            <md-button class="md-raised md-primary" >Exportar</md-button>
+            <md-button class="md-raised md-warn"  href="{{ path('materia_delete_all') }}">Borrar</md-button>
+        </md-card-actions>
+            
+    </md-card>
+
+{% endblock %}
+
+
+{% block mdContent %}
+<div ng-controller="indexCtrl" ng-init="init({{ initData}})">   
+ <md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <span>Materias</span>
+  </div>
+</md-toolbar>
+
+<!-- exact table from live demo -->
+{% verbatim %}
+<md-table-container>
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getMaterias">
+      <tr md-row>
+        <th md-column md-numeric>Id</th>
+        <th md-column md-numeric>Nombre</th>
+        <th md-column md-numeric>Codigo</th>
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="materia" md-select-id="id" md-auto-select ng-repeat="materia in materias">
+        <td md-cell>{{ materia.id }}</td>
+        <td md-cell>{{ materia.nombre }}</td>
+        <td md-cell>{{ materia.codigo }}</td>
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{ materias.length }}" md-on-paginate="getMaterias" md-page-select></md-table-pagination>
+{% endverbatim %}
+    
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script type="text/javascript"> 
+    app.controller('indexCtrl', function ($http,$scope) {
+        $scope.selected = [];
+        $scope.materias = [];
+        $scope.materia = {};
+        $scope.query = {
+            order: 'nombre',
+            limit: 5,
+            page: 1
+        };
+        $scope.getMaterias = function() {
+            return materia.promise = $http.get(Routing.generate('materia_index'), {params: $scope.query});
+        }
+        //inicializa el controller
+        $scope.init = function(json) {
+            $scope.materias = json;
+        }
+    })
+</script>
+{% endblock %}

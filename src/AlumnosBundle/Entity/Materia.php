@@ -24,14 +24,14 @@ class Materia
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=10, nullable=true)
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
      */
     private $nombre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codigo", type="string", length=255, nullable=true)
+     * @ORM\Column(name="codigo", type="string", length=255, nullable=false)
      */
     private $codigo;
 
@@ -92,4 +92,11 @@ class Materia
     {
         return $this->codigo;
     }
+    
+    public function __toString() {
+        return $this->nombre;
+    }
+
+    
+    
 }

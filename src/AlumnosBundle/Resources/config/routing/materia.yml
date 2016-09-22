@@ -1,0 +1,29 @@
+materia_index:
+    path:     /
+    defaults: { _controller: "AlumnosBundle:Materia:index" }
+    methods:  GET
+
+materia_show:
+    path:     /{id}/show
+    defaults: { _controller: "AlumnosBundle:Materia:show" }
+    methods:  GET
+
+materia_new:
+    path:     /new
+    defaults: { _controller: "AlumnosBundle:Materia:new" }
+    methods:  [GET, POST]
+
+materia_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AlumnosBundle:Materia:edit" }
+    methods:  [GET, POST]
+
+materia_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AlumnosBundle:Materia:delete" }
+    methods:  DELETE
+#Enviar como un formulario los ids a borrar    
+materia_delete_all:
+    path:     /deleteAll
+    defaults: { _controller: "AlumnosBundle:Materia:delete" }
+    methods:  POST

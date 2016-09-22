@@ -48,6 +48,15 @@ class Curso
      * @ORM\Column(name="fecha_cierre", type="datetime", nullable=false)
      */
     private $fechaCierre;
+    
+//    /**
+//     * Agregar a la base de datos el campo para poder filtrar los cursos activo
+//     *      
+//     * @var \Integer
+//     *
+//     * @ORM\Column(name="es_activo", type="boolean", nullable=false)
+//     */
+//    private $esActivo;
 
     /**
      * @var \AlumnosBundle\Entity\Materia
@@ -184,5 +193,14 @@ class Curso
     public function getMateria()
     {
         return $this->materia;
+    }
+    
+    
+    public function __toString() {
+        //que materia no pueda ser null
+        if (! $this->getMateria()) {
+            return "";
+        }
+        return $this->getMateria()->getNombre();
     }
 }

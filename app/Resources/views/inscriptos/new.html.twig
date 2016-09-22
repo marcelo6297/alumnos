@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{#{% form_theme form 'templates/fields.html.twig' %}#}
+
+{% block mdToolBar %}
+    Nuevo
+{% endblock %}
+
+{% block mdContent %}
+    
+    <md-card ng-app='newInscriptoApp'>
+    {{ form_start(form) }}
+        {% verbatim %} 
+            
+        {% endverbatim %}
+        <md-card-content>
+        {{ form_widget(form) }}
+        
+        </md-card-content>
+        <md-card-action>
+            <md-button class="md-primary md-raised"  href="{{ path('inscriptos_index') }}">Volver</md-button>
+            <input type="submit" value="Guardar" />
+        </md-card-action>
+    {{ form_end(form) }} 
+    </md-card>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript"> 
+       angular.module('newInscriptoApp', ['ngMaterial']); 
+   </script>
+{% endblock%}

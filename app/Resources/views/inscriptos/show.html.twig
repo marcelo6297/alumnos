@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Inscriptos</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ inscripto.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecharegistro</th>
+                <td>{% if inscripto.fechaRegistro %}{{ inscripto.fechaRegistro|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Tipocursante</th>
+                <td>{{ inscripto.tipoCursante }}</td>
+            </tr>
+            <tr>
+                <th>Puntaje</th>
+                <td>{{ inscripto.puntaje }}</td>
+            </tr>
+            <tr>
+                <th>Calificacion</th>
+                <td>{{ inscripto.calificacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('inscriptos_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('inscriptos_edit', { 'id': inscripto.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

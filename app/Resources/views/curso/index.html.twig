@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block mdToolBar %}
+    Lista de cursos
+{% endblock %}
+
+
+{% block mdContent %} 
+
+    <md-card>       
+
+        <md-card-content>
+
+            <table>
+                <thead>
+                    {% set ths = [ 'materia','periodo','fecha inicio', 'fecha fin',  'fecha cierre', 'acciones'] %}
+                    <th ><md-checkbox > </md-checkbox></th>
+                    {% for th in ths %}
+                        <th>{{ th |upper }} </th>
+                    {% endfor %}
+                </thead>
+            <tbody class="md-2-line" >
+        {% for curso in cursos %}
+            
+            <tr>
+                <td> 
+                    <md-checkbox ></md-checkbox>
+                </td>
+                <td>{% if curso.materia %}{{ curso.materia.nombre }}{% endif %} </td>
+                <td>{% if curso.periodo %}{{ curso.periodo|date('Y') }}{% endif %} </td>
+                <td>{% if curso.fechaInicio %}{{ curso.fechaInicio|date('Y-m-d') }}{% endif %}</td> 
+                <td>{% if curso.fechaFin %}{{ curso.fechaFin|date('Y-m-d') }}{% endif %} </td>
+                <td>{% if curso.fechaCierre %}{{ curso.fechaCierre|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <md-button href="{{ path('curso_show', { 'id': curso.id }) }}" class="md-secondary">Editar</md-button>
+                </td>
+            </tr> 
+                     
+        {% endfor %}
+            </tbody>
+            
+        
+            </table>
+        </md-card-content>
+            
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary"  >Nuevo</md-button>
+            <md-button class="md-raised md-primary" >Exportar</md-button>
+            <md-button class="md-raised md-warn" >Borrar</md-button>
+        </md-card-actions>
+            
+    </md-card>
+
+    
+{% endblock %}

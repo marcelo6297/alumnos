@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block mdContent %}
+     <md-toolbar>
+        Curso
+     </md-toolbar>
+     <md-card>  
+    <md-card-content>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ materia.id }}</td>
+            </tr>
+            
+            <tr>
+                <th>Nombre</th>
+                <td>{{ materia.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Codigo</th>
+                <td>{{ materia.codigo }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('materia_index') }}">Volver al listado</a>
+        </li>
+        <li>
+            <a href="{{ path('materia_edit', { 'id': materia.id }) }}">Editar</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+        </md-card-content>
+     </md-card>
+{% endblock %}

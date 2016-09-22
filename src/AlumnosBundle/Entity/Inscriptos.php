@@ -89,6 +89,7 @@ class Inscriptos
      */
     public function setFechaRegistro($fechaRegistro)
     {
+        
         $this->fechaRegistro = $fechaRegistro;
 
         return $this;
