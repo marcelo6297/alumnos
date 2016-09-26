@@ -6,14 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CursoControllerTest extends WebTestCase
 {
-    /*
+    
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
         $client = static::createClient();
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/cursos/');
+        $crawler = $client->request('GET', '/curso/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /cursos/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
@@ -51,5 +51,5 @@ class CursoControllerTest extends WebTestCase
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
 
-    */
+    
 }

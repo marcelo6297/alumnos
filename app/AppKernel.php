@@ -15,11 +15,14 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new AppBundle\AppBundle(),
             new AlumnosBundle\AlumnosBundle(),
+//          Manejo de Usuarios  
             new FOS\UserBundle\FOSUserBundle(),
+//            Manejo de RestAPI
             new FOS\RestBundle\FOSRestBundle(),
+//            Publicar las rutas a JavaScript
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+//            Serializador de objetos PHP
             new JMS\SerializerBundle\JMSSerializerBundle(),
             //Manejo de formularios en formato JSON
             new Mcfedr\JsonFormBundle\McfedrJsonFormBundle(),

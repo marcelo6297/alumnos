@@ -1,11 +1,11 @@
 <?php
 
-namespace AlumnosBundle\Tests\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class MateriaControllerTest extends WebTestCase
-{
+//namespace AlumnosBundle\Tests\Controller;
+//
+//use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+//
+//class MateriaControllerTest extends WebTestCase
+//{
     /*
     public function testCompleteScenario()
     {
@@ -52,4 +52,4 @@ class MateriaControllerTest extends WebTestCase
     }
 
     */
-}
+//}

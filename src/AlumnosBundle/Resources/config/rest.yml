@@ -1,0 +1,6 @@
+## YAML Template.
+materia:
+    type: rest
+    name_prefix: api_
+    resource: "@AlumnosBundle/Controller/MateriaRestController.php"
+   

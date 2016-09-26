@@ -32,3 +32,9 @@ monolog:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+##Utilizar el Bundle para RESTApi
+#fos_rest:
+#    param_fetcher_listener: true
+#    routing_loader:
+#        default_format: json

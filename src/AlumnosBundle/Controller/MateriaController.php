@@ -7,8 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AlumnosBundle\Entity\Materia;
 use AlumnosBundle\Form\MateriaType;
-//Paginador de doctrine
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Materia controller.
@@ -24,25 +22,33 @@ class MateriaController extends Controller
     {
         
         
-        $this;
+        
         
         $em = $this->getDoctrine()->getManager();
         
-        $em->createQuery();
-
-        $materias = $em->getRepository('AlumnosBundle:Materia')->findAll();
         
-        
-        $paginator = new Paginator($query, $fetchJoinCollection = true);
+        //Retorna un objeto paginador
+        $paginator = $em->getRepository('AlumnosBundle:Materia')->getAllMaterias();
+        $result = array();
+        foreach($paginator as $page) {
+             $result[] = $page;
+            
+        }
         
         
         $serializer = $this->container->get('serializer');
-        $datosJson = $serializer->serialize($materias, 'json');
+//        $datosJson = $serializer->serialize($result, 'json');
+        
+        $initData = array (
+            'totalCount' => $paginator->count(),
+            'recordsCount' => $paginator->getIterator()->count(),
+            'records' => $result
+            );
         
 
         return $this->render('materia/index.html.twig', array(
-            'materias' => $materias,
-            'initData' => $datosJson,
+            'materias' => $paginator,
+            'initData' => $serializer->serialize($initData, 'json'),
         ));
     }
 

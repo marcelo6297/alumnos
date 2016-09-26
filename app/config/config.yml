@@ -76,4 +76,10 @@ fos_user:
     
 #Rutas expuestas    
 fos_js_routing:
-    routes_to_expose: [ curso, materia, inscriptos ]    
+    routes_to_expose: [ curso, materia, inscriptos , _api]
+    
+#Utilizar el Bundle para RESTApi
+fos_rest:
+    param_fetcher_listener: true
+    routing_loader:
+        default_format: json    

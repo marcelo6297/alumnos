@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+
+{% block mdToolBar %}
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Lista de inscriptos</h1>
+    </md-toolbar> 
+{% endblock %}
+
+{% block mdContent %}
+
+    <md-card>       
+        <md-card-content>
+            <md-list>
+                {% for materium in result %}
+                <md-list-item class="md-2-line" >
+                    <md-checkbox ></md-checkbox>
+                    <div class="md-list-item-text">
+                        <h3>{{ materium.nombre }}</h3>
+                        <p>{{ materium.codigo}}</p>
+                    </div>
+                </md-list-item>
+                {% endfor %}
+            </md-list>
+        </md-card-content>
+
+{% endblock %}

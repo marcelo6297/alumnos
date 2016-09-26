@@ -2,10 +2,6 @@ alumnos:
     resource: "@AlumnosBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
-
 #Importar la configuracion para las rutas de FOSUserBundle
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
@@ -13,4 +9,8 @@ fos_user:
 #Importar las rutas de JsRouting
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-    
+ 
+#Ruta de la api
+api:
+    type: rest
+    resource: "@AlumnosBundle/Resources/config/rest.yml"
