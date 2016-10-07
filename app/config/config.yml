@@ -83,3 +83,5 @@ fos_rest:
     param_fetcher_listener: true
     routing_loader:
         default_format: json    
+#        Rol al cual no se le aplica la validacion de csrf
+    disable_csrf_role: ROLE_API

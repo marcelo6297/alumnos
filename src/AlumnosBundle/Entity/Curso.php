@@ -61,7 +61,7 @@ class Curso
     /**
      * @var \AlumnosBundle\Entity\Materia
      *
-     * @ORM\ManyToOne(targetEntity="AlumnosBundle\Entity\Materia")
+     * @ORM\ManyToOne(targetEntity="AlumnosBundle\Entity\Materia" , inversedBy="cursos")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="materia_id", referencedColumnName="id")
      * })

@@ -9,25 +9,16 @@
 {% block mdContent2 %} 
     
     
-    <md-card>       
-        <md-card-content>
-            <md-list>
-                {% for materium in materias %}
-                <md-list-item class="md-2-line" >
-                    <md-checkbox ></md-checkbox>
-                    <div class="md-list-item-text">
-                        <h3>{{ materium.nombre }}</h3>
-                        <p>{{ materium.codigo}}</p>
-                    </div>
-                </md-list-item>
-                {% endfor %}
-            </md-list>
-        </md-card-content>
+    <md-dialog>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </md-dialog>
             
         <md-card-actions layout="row" layout-align="end center">
             <md-button class="md-raised md-primary" href="{{ path('materia_new') }}">Nuevo</md-button>
             <md-button class="md-raised md-primary" >Exportar</md-button>
-            <md-button class="md-raised md-warn"  href="{{ path('materia_delete_all') }}">Borrar</md-button>
+            <md-button ng-show="seleccionados" class="md-raised md-warn"  href="{{ path('materia_delete_all') }}">Borrar</md-button>
         </md-card-actions>
             
     </md-card>
@@ -36,38 +27,91 @@
 
 
 {% block mdContent %}
-<div ng-controller="indexCtrl" ng-init="init({{ initData}})">   
+<div ng-controller="indexCtrl" ng-init="init({{ initData}})" ng-cloak>   
     
- <md-toolbar class="md-table-toolbar md-default">
-  <div class="md-toolbar-tools">
-    <span>Materias</span>
-  </div>
-</md-toolbar>
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="myDialog">
+        <md-dialog>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Agregar Items</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="hide()">
+                        <md-icon aria-label="Close dialog"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content>
+              <div class="md-dialog-content">
+                        <div>
+                        {{ form_start(form) }}
+                        <md-input-container >
+                            {{ form_label (form.nombre)  }}
+                            {{ form_widget(form.nombre)  }}
+                        </md-input-container>
+                        <md-input-container >
+                            {{ form_label(form.codigo)  }}
+                            {{ form_widget(form.codigo)  }}
+                        </md-input-container>
+                        {{ form_end(form) }}
+                        </div>
+              </div>
+            </md-dialog-content>
+              <md-dialog-actions layout="row">
+                  {% verbatim %}
+                  
+                  <md-button class="md-raised md-primary" ng-click="new()" ng-show="materia.$valid && materia.$dirty">Guardar</md-button>
+                  <md-button class="md-raised md-primary" ng-click="hide()">Cancelar</md-button>
+                  
+                  {% endverbatim %}
+              </md-dialog-actions>
+            
+        </md-dialog>
+    </div>
+    </div>
+    
+    
+    <md-card>
+         <md-toolbar class="md-table-toolbar md-default">
+          <div class="md-toolbar-tools">
+            <span>Materias</span>
+          </div>
+        </md-toolbar>
 
 <!-- exact table from live demo -->
-{% verbatim %}   
-<md-table-container>
-    {{ error }}
-  <table md-table md-row-select multiple ng-model="selected" md-progress="promesa">
-    <thead md-head md-order="query.order" md-on-reorder="getMaterias">
-      <tr md-row>
-        <th md-column md-order-by="id">Id</th>
-        <th md-column md-order-by="nombre">Nombre</th>
-        <th md-column md-order-by="codigo">Codigo</th>
-      </tr>
-    </thead>
-    <tbody md-body>
-      <tr md-row md-select="materia" md-select-id="id" md-auto-select ng-repeat="materia in materias">
-        <td md-cell>{{ materia.id }}</td>
-        <td md-cell>{{ materia.nombre }}</td>
-        <td md-cell>{{ materia.codigo }}</td>
-      </tr>
-    </tbody>
-  </table>
-</md-table-container>
+           
+        {% verbatim %}   
+    
+        <md-table-container>
+            <h4 ng-show="mensajes">{{ mensajes }}</h4>
+          <table md-table md-row-select multiple ng-model="seleccionados" md-progress="promesa">
+            <thead md-head md-order="query.order" md-on-reorder="getMaterias">
+              <tr md-row>
+                <th md-column md-order-by="id">Id</th>
+                <th md-column md-order-by="nombre">Nombre</th>
+                <th md-column md-order-by="codigo">Codigo</th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row md-select="item" md-select-id="id" md-auto-select ng-repeat="item in materias">
+                <td md-cell>{{ item.id }}</td>
+                <td md-cell>{{ item.nombre }}</td>
+                <td md-cell>{{ item.codigo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
 
-<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{ totalCount }}" md-on-paginate="getMaterias" md-page-select></md-table-pagination>
-{% endverbatim %}
+        <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="{{ totalCount }}" md-on-paginate="getMaterias" md-page-select></md-table-pagination>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button class="md-raised md-warn"    ng-show="isVisible()" ng-click="delete()">Borrar ({{ seleccionados.length }})</md-button>
+            <md-button class="md-raised md-primary" ng-click="showDialog($event)">Nuevo</md-button>
+            <md-button class="md-raised md-primary" ng-click="export()">Exportar</md-button>
+        </md-card-actions>
+
+        </md-card>
+        {% endverbatim %}
     
     </div>
 {% endblock %}
@@ -76,16 +120,20 @@
 {% block javascripts %}
 
 <script type="text/javascript"> 
-    app.controller('indexCtrl', function ($http,$scope) {
-        $scope.selected = [];
-        $scope.materias = [];
-        $scope.materia = {};
+    app.controller('indexCtrl', function ($mdDialog, $http,$scope) {
+        
+        $scope.seleccionados= [];
+        $scope.isSubmitted = false;
         $scope.promesa = false;
         $scope.query = {
             order: 'id',
             limit: 5,
             page: 1
         };
+        $scope.isVisible = function() {
+            return $scope.seleccionados.length && !$scope.isSubmitted;
+        }
+        
         $scope.getMaterias = function() {
             $scope.promesa = $http.get(Routing.generate('api_cget_materia'), {params: $scope.query})
                     .success(function(json) {
@@ -101,6 +149,66 @@
             $scope.materias = json.records;
             $scope.totalCount = json.totalCount;
         }
+        
+        /**
+         * Es una funcion que solo debe ser ejecutada por el administrador y ROLE_API
+         * @returns {undefined}
+         */
+        $scope.delete = function(){
+            var ids = [];
+            
+            $scope.seleccionados;
+            for (var i=0; i< $scope.seleccionados.length; i++){
+                ids.push($scope.seleccionados[i].id);
+            }
+            $scope.promesa = $http.post(Routing.generate('api_post_materia_removeall'), {ids: ids})
+                    .success(function(json){
+                        $scope.mensajes = "Borrados";
+                        $scope.isSubmitted = true;
+                        $scope.seleccionados = [];   
+                        $scope.getMaterias();
+                    })
+                    .error(function(json){
+                        var ids = "";
+                        for(var i=0 ; i < json.length; i++ ) {
+                            ids += json[i]+', '; 
+                        }
+                        $scope.mensajes = "No pudieron ser borrados: "+ids;
+                        $scope.seleccionados = [];   
+                        $scope.getMaterias();
+                    })
+        }
+        
+        $scope.new = function(){
+            $scope.isSubmitted = true;
+            var $item = $scope.item;$scope.item={}
+            $scope.promesa = $http.post(Routing.generate('api_post_materia'), {materia : $item})
+                    .success(function(json){         
+                        $scope.mensajes = "Guardado";
+                        $scope.isSubmitted = false;
+                        $scope.getMaterias();
+                    })
+        }
+        
+        //Funcion mostrar dialog
+        $scope.showDialog = function(ev) {
+        
+            var confirm = {
+                  controller: DialogController,
+                  contentElement: '#myDialog',
+                  parent: angular.element(document.body),
+                  targetEvent: ev,
+                  clickOutsideToClose: true,
+                };
+
+            $mdDialog.show(confirm);
+      };
+      
+      function DialogController($scope, $mdDialog) {
+          $scope.hide = function() {
+              $mdDialog.hide();
+          }
+      }
     })
 </script>
 {% endblock %}

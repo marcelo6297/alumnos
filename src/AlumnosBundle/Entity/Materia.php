@@ -3,6 +3,7 @@
 namespace AlumnosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Materia
@@ -34,6 +35,11 @@ class Materia
      * @ORM\Column(name="codigo", type="string", length=255, nullable=false)
      */
     private $codigo;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="AlumnosBundle\Entity\Curso", mappedBy="materia")
+     */
+    private $cursos;
 
 
 
@@ -95,6 +101,18 @@ class Materia
     
     public function __toString() {
         return $this->nombre;
+    }
+    function __construct() {
+        $this->cursos = new ArrayCollection();
+    }
+    
+    
+    /**
+     * Obtener la lista de cursos
+     */
+    
+    public function getCursos() {
+        return $this->cursos;
     }
 
     

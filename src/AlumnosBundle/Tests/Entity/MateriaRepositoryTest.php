@@ -61,8 +61,58 @@ class MateriaRepositoryTest extends KernelTestCase {
         
         $this->assertNotEquals($materia1->getId(), $materia2->getId());        
         $this->assertEquals($materia1->getId(), 1);        
-        $this->assertEquals(7, $materia2->getId());        
+        $this->assertEquals(30, $materia2->getId());        
         
+    }
+    
+    /**
+     * Debe remover todos los ids que se le pasa
+     */
+    public function testRemoveAllOk() {
+        $ids = array(29,30);
+        $materiaRepository = $this->em->getRepository('AlumnosBundle:Materia');
+        $array = $materiaRepository->removeAllByIds($ids);
+        //que valor debo esperar
+        
+        $this->assertEquals( 0, count($array));
+        
+    }
+    
+    /*
+     * No debe remover los ids que se le pasa
+     */
+    public function testRemoveAllNoOk() {
+        $ids = array(4,6);
+        $materiaRepository = $this->em->getRepository('AlumnosBundle:Materia');
+        $array = $materiaRepository->removeAllByIds($ids);
+        
+        $this->assertEquals(  2 , count($array) );
+        $this->assertEquals(  4 , $array[0]);
+        $this->assertEquals(  6 , $array[1]);
+    }
+    
+    /*
+     * El resultado es que tire un error al recibir datos nulos 
+     */
+    public function testRemoveNull() {
+        $ids = null;
+        $materiaRepository = $this->em->getRepository('AlumnosBundle:Materia');
+        //no acepta null como argumento
+        $array = $materiaRepository->removeAllByIds($ids);
+        $this->assertEquals( 0, count($array)  );
+        
+    }
+    
+    /*
+     * Prueba para remover una lista vacia
+     * El resultado esperado es que se ejecute y devuelva 0
+     */
+    public function testRemoveEmpty() {
+        $ids = array();
+        $materiaRepository = $this->em->getRepository('AlumnosBundle:Materia');
+        $array = $materiaRepository->removeAllByIds($ids);
+        
+        $this->assertEquals( 0 , count($array));
     }
 
         protected function tearDown()

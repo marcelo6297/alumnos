@@ -22,7 +22,8 @@ class MateriaController extends Controller
     {
         
         
-        
+        $materium = new Materia();
+        $form = $this->createForm('AlumnosBundle\Form\MateriaType', $materium);
         
         $em = $this->getDoctrine()->getManager();
         
@@ -39,6 +40,8 @@ class MateriaController extends Controller
         $serializer = $this->container->get('serializer');
 //        $datosJson = $serializer->serialize($result, 'json');
         
+        
+        
         $initData = array (
             'totalCount' => $paginator->count(),
             'recordsCount' => $paginator->getIterator()->count(),
@@ -49,6 +52,7 @@ class MateriaController extends Controller
         return $this->render('materia/index.html.twig', array(
             'materias' => $paginator,
             'initData' => $serializer->serialize($initData, 'json'),
+            'form' => $form->createView(),
         ));
     }
 

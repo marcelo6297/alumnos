@@ -409,7 +409,7 @@
 
 {%- block widget_attributes -%}
     ng-init="{{ name }} = '{{ value| replace({"'":"\\'", "\\":"\\\\" })|e('html_attr') }}'"
-    ng-model="{{ name }}"
+    ng-model="item.{{ name }}"
     id="{{ id }}" name="{{ full_name }}"
     {%- if disabled %} disabled="disabled"{% endif -%}
     {%- if required %} required="required"{% endif -%}

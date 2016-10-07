@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+
+{% block mdToolBar %}
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Lista de inscriptos</h1>
+    </md-toolbar> 
+{% endblock %}
+
+{% block mdContent %}
+
+   <h1>Formulario</h1>
+    <form action="{{ url('api_post_materia') }}" method="POST" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" value="submit">
+    </form>
+
+{% endblock %}

@@ -56,7 +56,8 @@ class MateriaRepository extends EntityRepository{
      * Retorna una structura de campo y nombre
      * @param type $campo
      */
-    public function getCampoOrden($campo) {
+    public function getCampoOrden($campo) 
+    {
         
         if (substr($campo, 0, 1) == "-") 
         {
@@ -68,6 +69,39 @@ class MateriaRepository extends EntityRepository{
             $_campo = $campo;      
             $result = new CampoOrden($_campo, $this->asc)  ;
         }
+        return $result;
+    }
+    
+    /**
+     * Recibe una array con los ids y borra todas las materias de la DDBB
+     * @param array $ids
+     * @return $mixed Lista de los ids no borrados; vacia si borro todo;
+     */
+    public function removeAllByIds(array $ids) 
+    {
+        $result = array();
+        $batchSize = 20;
+        $i = 0;
+        $em = $this->getEntityManager();
+        
+        $materias = $this->findBy(array('id' => $ids));
+        
+        foreach($materias as $materia) 
+        {  
+                $cursos = $materia->getCursos();
+                if ($cursos->count() > 0)
+                {
+                    $result[] = $materia->getId();
+                    continue;
+                }
+                $em->remove($materia);
+                if (( $i % $batchSize ) === 0) 
+                {
+                    $em->flush(); //Execute delete
+                }
+                $i++;
+        }
+        $em->flush();
         return $result;
     }
     
